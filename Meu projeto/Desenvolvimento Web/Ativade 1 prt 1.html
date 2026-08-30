@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade Prática 2 - Mídia e Geolocalização</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; color: #2c3e50; }
+  h1 { font-size: 22px; }
+  section { margin-bottom: 30px; }
+  video, audio { width: 100%; }
+  button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #3498db; color: #fff; border: none; border-radius: 4px; }
+  button:hover { background: #2980b9; }
+  #resultado { margin-top: 10px; font-weight: bold; }
+</style>
+</head>
+<body>
+  <h1>Página de Mídia Interativa com Geolocalização</h1>
+
+  <section>
+    <h2>Vídeo</h2>
+    <video controls>
+      <source src="video-exemplo.mp4" type="video/mp4">
+      Seu navegador não suporta o elemento de vídeo.
+    </video>
+  </section>
+
+  <section>
+    <h2>Áudio</h2>
+    <audio controls>
+      <source src="audio-exemplo.ogg" type="audio/ogg">
+      Seu navegador não suporta o elemento de áudio.
+    </audio>
+  </section>
+
+  <section>
+    <h2>Geolocalização</h2>
+    <button onclick="obterLocalizacao()">Mostrar minha localização</button>
+    <p id="resultado"></p>
+  </section>
+
+  <script>
+    function obterLocalizacao() {
+      const resultado = document.getElementById('resultado');
+
+      if (!navigator.geolocation) {
+        resultado.textContent = 'Geolocalização não é suportada pelo seu navegador.';
+        return;
+      }
+
+      resultado.textContent = 'Buscando localização...';
+
+      navigator.geolocation.getCurrentPosition(
+        function (posicao) {
+          const lat = posicao.coords.latitude;
+          const lon = posicao.coords.longitude;
+          resultado.textContent = 'Latitude: ' + lat.toFixed(6) + ', Longitude: ' + lon.toFixed(6);
+        },
+        function (erro) {
+          resultado.textContent = 'Não foi possível obter a localização: ' + erro.message;
+        }
+      );
+    }
+  </script>
+</body>
+</html>

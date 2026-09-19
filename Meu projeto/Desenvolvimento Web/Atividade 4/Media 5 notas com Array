@@ -1,0 +1,42 @@
+function calcularMediaNotas() {
+    let notas = [];
+
+    // 1. Entrada
+    for (let i = 0; i < 5; i++) {
+        let nota = parseFloat(prompt(`Digite a nota ${i + 1}:`));
+        notas.push(nota); // 2. Array
+    }
+
+    // 3. Repetição + 4. Cálculo
+    let soma = 0;
+    for (let i = 0; i < notas.length; i++) {
+        soma += notas[i];
+    }
+
+    let media = soma / notas.length;
+
+    console.log("Notas informadas:", notas);
+    console.log("Média da turma:", media.toFixed(2));
+
+    // Extra: maior e menor nota
+    let maior = notas[0];
+    let menor = notas[0];
+
+    for (let i = 1; i < notas.length; i++) {
+        if (notas[i] > maior) maior = notas[i];
+        if (notas[i] < menor) menor = notas[i];
+    }
+
+    console.log("Maior nota:", maior);
+    console.log("Menor nota:", menor);
+
+    // Mostrando na tela também
+    document.body.innerHTML = `
+        <h2>Notas: ${notas.join(", ")}</h2>
+        <p>Média: ${media.toFixed(2)}</p>
+        <p>Maior nota: ${maior}</p>
+        <p>Menor nota: ${menor}</p>
+    `;
+}
+
+calcularMediaNotas();

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Média - Atividade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            font-size: 22px;
+        }
+        .campo {
+            margin-bottom: 12px;
+        }
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1b5e20;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 4px;
+            display: none;
+        }
+        #resultado p {
+            margin: 6px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Calculadora de Média de 5 Notas</h1>
+
+    <div class="campo">
+        <label for="nota1">Nota 1:</label>
+        <input type="number" id="nota1" step="0.1">
+    </div>
+    <div class="campo">
+        <label for="nota2">Nota 2:</label>
+        <input type="number" id="nota2" step="0.1">
+    </div>
+    <div class="campo">
+        <label for="nota3">Nota 3:</label>
+        <input type="number" id="nota3" step="0.1">
+    </div>
+    <div class="campo">
+        <label for="nota4">Nota 4:</label>
+        <input type="number" id="nota4" step="0.1">
+    </div>
+    <div class="campo">
+        <label for="nota5">Nota 5:</label>
+        <input type="number" id="nota5" step="0.1">
+    </div>
+
+    <button onclick="calcularMediaNotas()">Calcular</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function calcularMediaNotas() {
+            // 1. Entrada
+            let notas = []; // 2. Array
+
+            for (let i = 1; i <= 5; i++) {
+                let valor = parseFloat(document.getElementById("nota" + i).value);
+
+                if (isNaN(valor)) {
+                    alert("Preencha todas as 5 notas antes de calcular.");
+                    return;
+                }
+
+                notas.push(valor);
+            }
+
+            // 3. Repetição + 4. Cálculo
+            let soma = 0;
+            for (let i = 0; i < notas.length; i++) {
+                soma += notas[i];
+            }
+            let media = soma / notas.length;
+
+            // Extra: maior e menor nota (sem usar Math.max/Math.min)
+            let maior = notas[0];
+            let menor = notas[0];
+
+            for (let i = 1; i < notas.length; i++) {
+                if (notas[i] > maior) maior = notas[i];
+                if (notas[i] < menor) menor = notas[i];
+            }
+
+            // Mostrando o resultado na tela
+            let divResultado = document.getElementById("resultado");
+            divResultado.style.display = "block";
+            divResultado.innerHTML = `
+                <p><strong>Notas informadas:</strong> ${notas.join(", ")}</p>
+                <p><strong>Média:</strong> ${media.toFixed(2)}</p>
+                <p><strong>Maior nota:</strong> ${maior}</p>
+                <p><strong>Menor nota:</strong> ${menor}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
